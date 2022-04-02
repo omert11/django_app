@@ -1,9 +1,9 @@
 from lib2to3.pgen2.pgen import generate_grammar
-from rest_framework import generics,permissions
+from rest_framework import generics,permissions,views
 from django.contrib.auth import authenticate
 from rest_framework.response import Response
 from rest_framework.decorators import api_view
-from core.models import Post,Hashtag,Profile
+from core.models import Post,Hashtag,Profile, UserFollowing
 from django.contrib.auth.models import User
 from rest_framework.authtoken.models import Token
 from rest_framework.authtoken.serializers import AuthTokenSerializer
@@ -81,3 +81,12 @@ class ProfileUpdate(generics.RetrieveUpdateAPIView):
     queryset = Profile.objects.all()
     serializer_class=ProfileSerializer
     permission_classes = [IsOwnerOrReadOnly]
+
+
+class FollowView(views.APIView):
+
+    def put(self,request):
+        return Response({
+            "likes_count": UserFollowing.objects.filter(to_user__username=request.POST.get("username", None)).count(), 
+            "followed": request.user.profile.follow_toggle(request.POST.get("username", None))
+        }) 

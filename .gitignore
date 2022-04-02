@@ -1,2 +1,4 @@
 /.vscode
 /db.sqlite3
+/socialapp
+*.pyc

@@ -65,7 +65,18 @@
         <div class="form">
             <form method="POST" class="form"><br><br>
                 {% csrf_token %}
-                <label class="formm-control">
+                  {{form}}
+                <input style="background-color:white;" class="formm-control"  type="submit" value="Save">
+            
+            </form>
+            </div>
+    </div>  
+</div>
+
+
+{% endblock content %}
+
+{% comment %} <label class="formm-control">
                     
                     <input type="checkbox" name="is_private" {% if is_private %}checked{% endif %}  />
                     <small>Turn <i style="background-color:#8FF7A7;color:black" > Private Account</i>  on</small>
@@ -87,14 +98,4 @@
                 <small>Only <i style="background-color:#8FF7A7;color:black" > Friends</i></small>
             </label>
             <br><p>{% translate "If you don't want everyone to see your posts. Turn on to let only friends" %}</p>
-            <hr>
-            
-                <input style="background-color:white;" class="formm-control"  type="submit" value="Save">
-            
-            </form>
-            </div>
-    </div>  
-</div>
-
-
-{% endblock content %}
+            <hr> {% endcomment %}
